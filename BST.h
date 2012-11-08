@@ -10,7 +10,8 @@ class BST {
  private:
   Node<T>* root;
   int getTreeDepth(Node<T>* n);
-  void traversalPrint(Node<T>* root);
+  void inOrderTraversal(Node<T>* root);
+  void postOrderTraversal(Node<T>* root);
 
  public:
   BST<T>();

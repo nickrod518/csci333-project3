@@ -1,11 +1,10 @@
 #include "BST.h"
 #include <iostream>
 #include <sstream>
-#include <list>
 
 using std::cout;
 using std::endl;
-using std::list;
+using std::string;
 
 template <typename T>
 BST<T>::BST() {
@@ -112,7 +111,11 @@ void BST<T>::remove(T v) {
 
 template <typename T>
 void BST<T>::print() {
-  traversalPrint(root);
+  cout << "in order traversal:" << endl;
+  inOrderTraversal(root);
+
+  cout << "post order traversal:" << endl;
+  postOrderTraversal(root);
 }
 
 template <typename T>
@@ -132,11 +135,20 @@ int BST<T>::getTreeDepth(Node<T>* n) {
 }
 
 template <typename T>
-void BST<T>::traversalPrint(Node<T>* root) {
+void BST<T>::inOrderTraversal(Node<T>* root) {
   if(root != 0) {
-    traversalPrint(root->getLeftChild());
+    inOrderTraversal(root->getLeftChild());
     std::cout << root->getValue() << std::endl;
-    traversalPrint(root->getRightChild());
+    inOrderTraversal(root->getRightChild());
+  }
+}
+
+template <typename T>
+void BST<T>::postOrderTraversal(Node<T>* root) {
+  if(root != 0) {
+    postOrderTraversal(root->getLeftChild());
+    postOrderTraversal(root->getRightChild());
+    std::cout << root->getValue() << std::endl;
   }
 }
 
