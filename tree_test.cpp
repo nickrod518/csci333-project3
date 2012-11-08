@@ -1,11 +1,11 @@
-#include "BST.h"
+#include "AVL.h"
 #include <iostream>
 
 using std::cout;
 using std::endl;
 
 int main() {
-  BST<int>* bst = new BST<int>();
+  AVL<int>* bst = new AVL<int>();
 
   bst->insert(4);
   bst->insert(6);
