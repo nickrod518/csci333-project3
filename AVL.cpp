@@ -147,6 +147,34 @@ int AVL<T>::getBalance(Node<T>* n) {
 }
 
 template <typename T>
+void leftRotate(Node<T>** parent) {
+  Node<T>* cn = *parent;
+  Node<T>* temprc = cn->getRightChild();
+  if (temprc->getLeftChild() != 0) {
+    Node<T>* templc = temprc->getLeftChild();
+    temprc->setLeftChild(cn);
+    cn->setRightChild(templc);
+  } else {
+    temprc->setLeftChild(cn);
+  }
+  *parent = temprc;
+}
+
+template <typename T>
+void rightRotate(Node<T>** parent) {
+  Node<T>* cn = *parent;
+  Node<T>* templc = cn->getLeftChild();
+  if (templc->getRightChild() != 0) {
+    Node<T>* temprc = templc->getRightChild();
+    templc->setRightChild(cn);
+    cn->setLeftChild(temprc);
+  } else {
+    templc->setRightChild(cn);
+  }
+  *parent = templc;
+}
+
+template <typename T>
 void AVL<T>::inOrderTraversal(Node<T>* root) {
   if(root != 0) {
     inOrderTraversal(root->getLeftChild());
