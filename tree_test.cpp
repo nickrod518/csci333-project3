@@ -5,32 +5,23 @@ using std::cout;
 using std::endl;
 
 int main() {
-  AVL<int>* bst = new AVL<int>();
+  AVL<int>* avl = new AVL<int>();
 
-  bst->insert(4);
-  bst->insert(6);
-  bst->insert(5);
-  bst->insert(3);
-  bst->insert(2);
-  bst->insert(7);
-  bst->insert(12);
-  bst->insert(1);
+  avl->insert(4);
+  avl->insert(6);
+  avl->insert(5);
+  avl->insert(3);
+  avl->insert(2);
+  avl->insert(7);
+  avl->insert(12);
+  avl->insert(1);
 
-  bst->print();
+  avl->print();
   cout << "-----" << endl;
 
-  bst->remove(2);
-  bst->remove(1);
-  bst->remove(7);
-  bst->remove(6);
-  bst->remove(4);
-
-  bst->print();
-  cout << "-----" << endl;
-
-  bst->insert(10);
-  bst->insert(1);
-  
-  bst->print();
-  cout << "-----" << endl;
+  avl->remove(2);
+  avl->remove(1);
+  avl->remove(7);
+  avl->remove(6);
+  avl->remove(4);
 }

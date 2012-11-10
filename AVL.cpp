@@ -135,6 +135,18 @@ int AVL<T>::getTreeDepth(Node<T>* n) {
 }
 
 template <typename T>
+int AVL<T>::getBalance(Node<T>* n) {
+  if (n == 0) {
+    return 0;
+  } else {
+    int leftDepth = getTreeDepth(n->getLeftChild());
+    int rightDepth = getTreeDepth(n->getRightChild());
+
+    return rightDepth - leftDepth;
+  }
+}
+
+template <typename T>
 void AVL<T>::inOrderTraversal(Node<T>* root) {
   if(root != 0) {
     inOrderTraversal(root->getLeftChild());
