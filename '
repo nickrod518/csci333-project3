@@ -60,7 +60,7 @@ void AVL<T>::insert(T v) {
     if (getBalance(*curr) < -1) {
       rotateRight(parent);
     } else if (getBalance(*curr) > 1) {
-      rotateLeft(parent);
+      *parent = rotateLeft(*parent);
     }
   }
 }
@@ -165,29 +165,28 @@ int AVL<T>::getBalance(Node<T>* n) {
 }
 
 template <typename T>
-void AVL<T>::rotateLeft(Node<T>** parent) {
-  Node<T>* cn = *parent;
+Node<T>* rotateLeft(Node<T>*& cn) {
   Node<T>* temprc = cn->getRightChild();
   if (temprc->getLeftChild() != 0) {
     Node<T>* templc = temprc->getLeftChild();
-    temprc->setLeftChild(*cn);
-    cn->setRightChild(*templc);
+    temprc->setLeftChild(cn);
+    cn->setRightChild(templc);
   } else {
-    temprc->setLeftChild(*cn);
+    temprc->setLeftChild(cn);
   }
-  *parent = temprc;
+  return temprc;
 }
 
 template <typename T>
-void AVL<T>::rotateRight(Node<T>** parent) {
+void rotateRight(Node<T>** parent) {
   Node<T>* cn = *parent;
   Node<T>* templc = cn->getLeftChild();
   if (templc->getRightChild() != 0) {
     Node<T>* temprc = templc->getRightChild();
-    templc->setRightChild(*cn);
-    cn->setLeftChild(*temprc);
+    templc->setRightChild(cn);
+    cn->setLeftChild(temprc);
   } else {
-    templc->setRightChild(*cn);
+    templc->setRightChild(cn);
   }
   *parent = templc;
 }

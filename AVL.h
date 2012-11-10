@@ -11,10 +11,11 @@ class AVL {
   Node<T>* root;
   int getTreeDepth(Node<T>* n);
   int getBalance(Node<T>* n);
-  void leftRotate(Node<T>** parent);
-  void rightRotate(Node<T>** parent);
-  void inOrderTraversal(Node<T>* root);
-  void postOrderTraversal(Node<T>* root);
+  void rotateLeft(Node<T>** parent);
+  void rotateRight(Node<T>** parent);
+  void preOrderTraversal(Node<T>* curr);
+  void inOrderTraversal(Node<T>* curr);
+  void postOrderTraversal(Node<T>* curr);
 
  public:
   AVL<T>();
