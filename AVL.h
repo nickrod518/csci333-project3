@@ -10,7 +10,7 @@ class AVL {
  private:
   Node<T>* root;
   int getTreeDepth(Node<T>* n);
-  //int getBalance(Node<T>* n);
+  int getBalance(Node<T>* n);
   void inOrderTraversal(Node<T>* root);
   void postOrderTraversal(Node<T>* root);
 
@@ -18,7 +18,6 @@ class AVL {
   AVL<T>();
   ~AVL<T>();
 
-  int getBalance(Node<T>* n);
   bool find(T v);
   void remove(T v);
   void insert(T v);
