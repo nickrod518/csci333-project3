@@ -1,6 +1,7 @@
 #include "AVL.h"
 #include <iostream>
 #include <sstream>
+#include <stdlib.h>
 
 using std::cout;
 using std::endl;
@@ -40,15 +41,19 @@ void AVL<T>::insert(T v) {
   Node<T>** parent = 0;
 
   while (*curr != 0) {
+
     if (v < (*curr)->getValue()) {
-      // if -1 and inserting in left subtree
+      // if balance of -1 and inserting in left subtree...
       if (getBalance(*curr) < -1) {
+        // ...store this parent
         parent = curr;
       }
       curr = &((*curr)->getLeftChild());
+
     } else if (v > (*curr)->getValue()) {
-      // if 1 and inserting in right subtree
+      // if balance of 1 and inserting in right subtree...
       if (getBalance(*curr) > 1) {
+        // ...store this parent
         parent = curr;
       }
       curr = &((*curr)->getRightChild());
@@ -56,10 +61,23 @@ void AVL<T>::insert(T v) {
   }
   *curr = temp;
 
-  if (parent == 0) {
-    if (getBalance(*curr) < -1) {
+  // if there's a critical node, rotate
+  if (parent != 0) {
+
+    if (getBalance(*parent) < -1) {
+      // double rotation necessary
+      if (getBalance((*parent)->getLeftChild()) < 0) {
+        rotateLeft(&((*parent)->getLeftChild()));
+      }
+      // single rotation
       rotateRight(parent);
-    } else if (getBalance(*curr) > 1) {
+
+    } else if (getBalance(*parent) > 1) {
+      // double rotation necessary
+      if (getBalance((*parent)->getRightChild()) > 0) {
+        rotateLeft(&((*parent)->getRightChild()));
+      }
+      // single rotation
       rotateLeft(parent);
     }
   }
@@ -105,24 +123,28 @@ void AVL<T>::remove(T v) {
     // node has left and right child
     } else {
 
-      // in-order successor
-      Node<T>* IOS = (*curr)->getRightChild();
-      while (IOS->getLeftChild() != 0) {
-        IOS = IOS->getLeftChild();
-      }
-      IOS->setLeftChild(*((temp)->getLeftChild()));
-      *curr = IOS;
-      delete temp;
+      // randomize removal method
+      if (rand() % 2 == 1) {
 
-      /* in-order predecessor
-      Node<T>* IOP = (*curr)->getLeftChild();
-      while (IOP->getRightChild() != 0) {
-        IOP = IOP->getRightChild();
+        // in-order successor
+        Node<T>* IOS = (*curr)->getRightChild();
+        while (IOS->getLeftChild() != 0) {
+          IOS = IOS->getLeftChild();
+        }
+        IOS->setLeftChild(*((temp)->getLeftChild()));
+        *curr = IOS;
+        delete temp;
+
+      } else {
+        // in-order predecessor
+        Node<T>* IOP = (*curr)->getLeftChild();
+        while (IOP->getRightChild() != 0) {
+          IOP = IOP->getRightChild();
+        }
+        IOP->setRightChild(*((temp)->getRightChild()));
+        *curr = IOP;
+        delete temp;
       }
-      IOP->setRightChild(*((temp)->getRightChild()));
-      *curr = IOP;
-      delete temp;
-      */
     }
   }
 }
