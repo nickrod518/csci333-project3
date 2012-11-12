@@ -61,24 +61,25 @@ void AVL<T>::insert(T v) {
   }
   *curr = temp;
 
-  // if there's a critical node, rotate
+  // there is a suspect node
   if (parent != 0) {
 
     if (getBalance(*parent) < -1) {
-      // double rotation necessary
-      if (getBalance((*parent)->getLeftChild()) < 0) {
+      // left right case
+      if (getBalance((*parent)->getLeftChild()) > 0) {
         rotateLeft(&((*parent)->getLeftChild()));
       }
-      // single rotation
+      // left left case
       rotateRight(parent);
 
     } else if (getBalance(*parent) > 1) {
-      // double rotation necessary
-      if (getBalance((*parent)->getRightChild()) > 0) {
+      // right left case
+      if (getBalance((*parent)->getRightChild()) < 0) {
         rotateLeft(&((*parent)->getRightChild()));
       }
-      // single rotation
+      // right right case
       rotateLeft(parent);
+
     } else {
       // it was a false alarm
     }
@@ -156,15 +157,13 @@ void AVL<T>::print() {
   /*
   cout << "pre order traversal:" << endl;
   preOrderTraversal(root);
-  */
 
   cout << "in order traversal:" << endl;
   inOrderTraversal(root);
+  */
 
-  /*
   cout << "post order traversal:" << endl;
   postOrderTraversal(root);
-  */
 }
 
 template <typename T>
@@ -199,13 +198,12 @@ template <typename T>
 void AVL<T>::rotateLeft(Node<T>** parent) {
   Node<T>* cn = *parent;
   Node<T>* temprc = cn->getRightChild();
+
   if (temprc->getLeftChild() != 0) {
     Node<T>* templc = temprc->getLeftChild();
-    temprc->setLeftChild(*cn);
     cn->setRightChild(*templc);
-  } else {
-    temprc->setLeftChild(*cn);
   }
+  temprc->setLeftChild(*cn);
   *parent = temprc;
 }
 
@@ -213,13 +211,12 @@ template <typename T>
 void AVL<T>::rotateRight(Node<T>** parent) {
   Node<T>* cn = *parent;
   Node<T>* templc = cn->getLeftChild();
+
   if (templc->getRightChild() != 0) {
     Node<T>* temprc = templc->getRightChild();
-    templc->setRightChild(*cn);
     cn->setLeftChild(*temprc);
-  } else {
-    templc->setRightChild(*cn);
   }
+  templc->setRightChild(*cn);
   *parent = templc;
 }
 

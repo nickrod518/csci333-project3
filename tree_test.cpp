@@ -7,6 +7,14 @@ using std::endl;
 int main() {
   AVL<int>* avl = new AVL<int>();
 
+  avl->insert(5);
+  avl->insert(4);
+  avl->insert(6);
+  avl->insert(7);
+  avl->insert(8);
+  avl->print();
+
+  /*
   avl->insert(4);
   avl->print();
   avl->insert(6);
@@ -23,4 +31,5 @@ int main() {
   avl->print();
   avl->insert(1);
   avl->print();
+  */
 }
