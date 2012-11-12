@@ -15,7 +15,7 @@ template <typename T>
 class AVL {
  private:
   Node<T>* root;
-  int getTreeDepth(Node<T>* n);
+  int getDepth(Node<T>* n);
   int getBalance(Node<T>* n);
   void rotateLeft(Node<T>** parent);
   void rotateRight(Node<T>** parent);

@@ -170,12 +170,12 @@ void AVL<T>::print() {
 }
 
 template <typename T>
-int AVL<T>::getTreeDepth(Node<T>* n) {
+int AVL<T>::getDepth(Node<T>* n) {
   if (n == 0) {
     return 0;
   } else {
-    int leftDepth = getTreeDepth(n->getLeftChild());
-    int rightDepth = getTreeDepth(n->getRightChild());
+    int leftDepth = getDepth(n->getLeftChild());
+    int rightDepth = getDepth(n->getRightChild());
     
     if (leftDepth > rightDepth) {
       return leftDepth + 1;
@@ -190,8 +190,8 @@ int AVL<T>::getBalance(Node<T>* n) {
   if (n == 0) {
     return 0;
   } else {
-    int leftDepth = getTreeDepth(n->getLeftChild());
-    int rightDepth = getTreeDepth(n->getRightChild());
+    int leftDepth = getDepth(n->getLeftChild());
+    int rightDepth = getDepth(n->getRightChild());
 
     return rightDepth - leftDepth;
   }
