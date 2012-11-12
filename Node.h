@@ -14,7 +14,8 @@ class Node {
   T getValue();
 
   int getBalance();
-  void setBalance(int b);
+  void decBalance();
+  void incBalance();
 
   Node<T>*& getLeftChild();
   void setLeftChild(Node<T>& n);

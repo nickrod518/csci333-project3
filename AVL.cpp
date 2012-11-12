@@ -44,7 +44,7 @@ void AVL<T>::insert(T v) {
 
     if (v < (*curr)->getValue()) {
       // if balance of -1 and inserting in left subtree...
-      if (getBalance(*curr) < 0) {
+      if ((*curr)->getBalance() < 0) {
         // ...store this parent
         parent = curr;
       }
@@ -52,7 +52,7 @@ void AVL<T>::insert(T v) {
 
     } else if (v > (*curr)->getValue()) {
       // if balance of 1 and inserting in right subtree...
-      if (getBalance(*curr) > 0) {
+      if ((*curr)->getBalance() > 0) {
         // ...store this parent
         parent = curr;
       }
@@ -64,17 +64,17 @@ void AVL<T>::insert(T v) {
   // there is a suspect node
   if (parent != 0) {
 
-    if (getBalance(*parent) < -1) {
+    if ((*parent)->getBalance() < -1) {
       // left right case
-      if (getBalance((*parent)->getLeftChild()) > 0) {
+      if (((*parent)->getLeftChild())->getBalance() > 0) {
         rotateLeft(&((*parent)->getLeftChild()));
       }
       // left left case
       rotateRight(parent);
 
-    } else if (getBalance(*parent) > 1) {
+    } else if ((*parent)->getBalance() > 1) {
       // right left case
-      if (getBalance((*parent)->getRightChild()) < 0) {
+      if (((*parent)->getRightChild())->getBalance() < 0) {
         rotateLeft(&((*parent)->getRightChild()));
       }
       // right right case
@@ -199,12 +199,16 @@ void AVL<T>::rotateLeft(Node<T>** parent) {
   Node<T>* cn = *parent;
   Node<T>* temprc = cn->getRightChild();
 
+  // update pointers
   if (temprc->getLeftChild() != 0) {
     Node<T>* templc = temprc->getLeftChild();
     cn->setRightChild(*templc);
   }
   temprc->setLeftChild(*cn);
   *parent = temprc;
+
+  // update balances
+  temprc->decBalance();
 }
 
 template <typename T>
@@ -212,12 +216,16 @@ void AVL<T>::rotateRight(Node<T>** parent) {
   Node<T>* cn = *parent;
   Node<T>* templc = cn->getLeftChild();
 
+  // update pointers
   if (templc->getRightChild() != 0) {
     Node<T>* temprc = templc->getRightChild();
     cn->setLeftChild(*temprc);
   }
   templc->setRightChild(*cn);
   *parent = templc;
+
+  // update balances
+  templc->incBalance();
 }
 
 template <typename T>
