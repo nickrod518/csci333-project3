@@ -1,17 +1,18 @@
 #include "AVL.h"
-#include <iostream>
-
-using std::cout;
-using std::endl;
 
 int main() {
   AVL<int>* avl = new AVL<int>();
 
   avl->insert(5);
+  cout << "insert success";
   avl->insert(4);
+  cout << "insert success";
   avl->insert(6);
+  cout << "insert success";
   avl->insert(7);
+  cout << "insert success";
   avl->insert(8);
+  cout << "insert success";
   avl->print();
 
   /*

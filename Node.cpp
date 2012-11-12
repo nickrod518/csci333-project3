@@ -20,6 +20,11 @@ int Node<T>::getBalance() {
 }
 
 template <typename T>
+void Node<T>::setBalance(int b) {
+  balance = b;
+}
+
+template <typename T>
 void Node<T>::decBalance() {
   --balance;
 }

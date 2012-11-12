@@ -14,6 +14,7 @@ class Node {
   T getValue();
 
   int getBalance();
+  void setBalance(int b);
   void decBalance();
   void incBalance();
 

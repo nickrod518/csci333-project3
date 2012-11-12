@@ -13,5 +13,17 @@ int main() {
   std::cout << ni->getValue()<< std::endl;
   std::cout << nd->getValue()<< std::endl;
 
+  std::cout << ns->getBalance()<< std::endl;
+  std::cout << ni->getBalance()<< std::endl;
+  std::cout << nd->getBalance()<< std::endl;
+
+  ns->incBalance();
+  ni->decBalance();
+  nd->setBalance(2);
+
+  std::cout << ns->getBalance()<< std::endl;
+  std::cout << ni->getBalance()<< std::endl;
+  std::cout << nd->getBalance()<< std::endl;
+
   return 0;
 }

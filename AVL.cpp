@@ -1,11 +1,6 @@
 #include "AVL.h"
-#include <iostream>
 #include <sstream>
 #include <stdlib.h>
-
-using std::cout;
-using std::endl;
-using std::string;
 
 template <typename T>
 AVL<T>::AVL() {
@@ -59,29 +54,37 @@ void AVL<T>::insert(T v) {
       curr = &((*curr)->getRightChild());
     }
   }
+  // insert the node
   *curr = temp;
 
-  // there is a suspect node
-  if (parent != 0) {
+  // check for critical nodes
+  if ((*parent)->getBalance() < -1) {
+    // left right case
+    if (((*parent)->getLeftChild())->getBalance() > 0) {
+      rotateLeft(&((*parent)->getLeftChild()));
+    }
+    // left left case
+    rotateRight(parent);
 
-    if ((*parent)->getBalance() < -1) {
-      // left right case
-      if (((*parent)->getLeftChild())->getBalance() > 0) {
-        rotateLeft(&((*parent)->getLeftChild()));
+  } else if ((*parent)->getBalance() > 1) {
+    // right left case
+    if (((*parent)->getRightChild())->getBalance() < 0) {
+      rotateLeft(&((*parent)->getRightChild()));
+    }
+    // right right case
+    rotateLeft(parent);
+
+  // there are no critical nodes so adjust balances
+  } else {
+    curr = &root;
+    while ((*curr)->getValue() != v) {
+      // set balance
+      (*curr)->setBalance(getBalance(*curr));
+      if (v < (*curr)->getValue()) {
+        curr = &((*curr)->getLeftChild());
+      } else if (v > (*curr)->getValue()) {
+        curr = &((*curr)->getRightChild());
       }
-      // left left case
-      rotateRight(parent);
-
-    } else if ((*parent)->getBalance() > 1) {
-      // right left case
-      if (((*parent)->getRightChild())->getBalance() < 0) {
-        rotateLeft(&((*parent)->getRightChild()));
-      }
-      // right right case
-      rotateLeft(parent);
-
-    } else {
-      // it was a false alarm
     }
   }
 }
