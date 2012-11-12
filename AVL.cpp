@@ -37,7 +37,7 @@ template <typename T>
 void AVL<T>::insert(T v) {
   Node<T>* temp = new Node<T>(v);
   Node<T>** curr = &root;
-  // keep track of suspect critical nodes
+  // keep track of suspect critical node's parent
   Node<T>** parent = 0;
 
   while (*curr != 0) {
@@ -151,11 +151,18 @@ void AVL<T>::remove(T v) {
 
 template <typename T>
 void AVL<T>::print() {
+  /*
+  cout << "pre order traversal:" << endl;
+  preOrderTraversal(root);
+  */
+
   cout << "in order traversal:" << endl;
   inOrderTraversal(root);
 
+  /*
   cout << "post order traversal:" << endl;
   postOrderTraversal(root);
+  */
 }
 
 template <typename T>
@@ -217,7 +224,7 @@ void AVL<T>::rotateRight(Node<T>** parent) {
 template <typename T>
 void AVL<T>::preOrderTraversal(Node<T>* curr) {
   if (curr != 0) {
-    std::cout << curr->getValue() << std::endl;
+    std::cout << curr->getValue() << ", " << getBalance(curr) << std::endl;
     preOrderTraversal(curr->getLeftChild());
     preOrderTraversal(curr->getRightChild());
   }
@@ -227,7 +234,7 @@ template <typename T>
 void AVL<T>::inOrderTraversal(Node<T>* curr) {
   if (curr != 0) {
     inOrderTraversal(curr->getLeftChild());
-    std::cout << curr->getValue() << std::endl;
+    std::cout << curr->getValue() << ", " << getBalance(curr) << std::endl;
     inOrderTraversal(curr->getRightChild());
   }
 }
@@ -237,7 +244,7 @@ void AVL<T>::postOrderTraversal(Node<T>* curr) {
   if (curr != 0) {
     postOrderTraversal(curr->getLeftChild());
     postOrderTraversal(curr->getRightChild());
-    std::cout << curr->getValue() << std::endl;
+    std::cout << curr->getValue() << ", " << getBalance(curr) << std::endl;
   }
 }
 

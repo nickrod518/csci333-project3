@@ -8,23 +8,19 @@ int main() {
   AVL<int>* avl = new AVL<int>();
 
   avl->insert(4);
+  avl->print();
   avl->insert(6);
+  avl->print();
   avl->insert(5);
+  avl->print();
   avl->insert(3);
+  avl->print();
   avl->insert(2);
+  avl->print();
   avl->insert(7);
+  avl->print();
   avl->insert(12);
+  avl->print();
   avl->insert(1);
-
   avl->print();
-  cout << "-----" << endl;
-
-  avl->remove(2);
-  avl->remove(1);
-  avl->remove(7);
-  avl->remove(6);
-  avl->remove(4);
-
-  avl->print();
-  cout << "-----" << endl;
 }
