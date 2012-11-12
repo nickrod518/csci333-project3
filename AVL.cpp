@@ -223,7 +223,7 @@ void AVL<T>::rotateRight(Node<T>** parent) {
 template <typename T>
 void AVL<T>::preOrderTraversal(Node<T>* curr) {
   if (curr != 0) {
-    std::cout << curr->getValue() << ", " << getBalance(curr) << std::endl;
+    std::cout << curr->getValue() << ", " << curr->getBalance() << std::endl;
     preOrderTraversal(curr->getLeftChild());
     preOrderTraversal(curr->getRightChild());
   }
@@ -233,7 +233,7 @@ template <typename T>
 void AVL<T>::inOrderTraversal(Node<T>* curr) {
   if (curr != 0) {
     inOrderTraversal(curr->getLeftChild());
-    std::cout << curr->getValue() << ", " << getBalance(curr) << std::endl;
+    std::cout << curr->getValue() << ", " << curr->getBalance() << std::endl;
     inOrderTraversal(curr->getRightChild());
   }
 }
@@ -243,7 +243,7 @@ void AVL<T>::postOrderTraversal(Node<T>* curr) {
   if (curr != 0) {
     postOrderTraversal(curr->getLeftChild());
     postOrderTraversal(curr->getRightChild());
-    std::cout << curr->getValue() << ", " << getBalance(curr) << std::endl;
+    std::cout << curr->getValue() << ", " << curr->getBalance() << std::endl;
   }
 }
 
