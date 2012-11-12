@@ -44,7 +44,7 @@ void AVL<T>::insert(T v) {
 
     if (v < (*curr)->getValue()) {
       // if balance of -1 and inserting in left subtree...
-      if (getBalance(*curr) < -1) {
+      if (getBalance(*curr) < 0) {
         // ...store this parent
         parent = curr;
       }
@@ -52,7 +52,7 @@ void AVL<T>::insert(T v) {
 
     } else if (v > (*curr)->getValue()) {
       // if balance of 1 and inserting in right subtree...
-      if (getBalance(*curr) > 1) {
+      if (getBalance(*curr) > 0) {
         // ...store this parent
         parent = curr;
       }
@@ -79,6 +79,8 @@ void AVL<T>::insert(T v) {
       }
       // single rotation
       rotateLeft(parent);
+    } else {
+      // it was a false alarm
     }
   }
 }
