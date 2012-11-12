@@ -24,4 +24,7 @@ int main() {
   avl->remove(7);
   avl->remove(6);
   avl->remove(4);
+
+  avl->print();
+  cout << "-----" << endl;
 }

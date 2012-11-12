@@ -36,4 +36,3 @@ void Node<T>::setRightChild(Node<T>& rc) {
 template class Node<int>;
 template class Node<double>;
 template class Node<std::string>;
-

@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+using std::vector;
+
 template <typename T>
 class AVL {
  private:
