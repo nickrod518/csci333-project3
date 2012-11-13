@@ -57,22 +57,25 @@ void AVL<T>::insert(T v) {
   // insert the node
   *curr = temp;
 
-  // check for critical nodes
-  if ((*parent)->getBalance() < -1) {
-    // left right case
-    if (((*parent)->getLeftChild())->getBalance() > 0) {
-      rotateLeft(&((*parent)->getLeftChild()));
-    }
-    // left left case
-    rotateRight(parent);
+  // check if suspect node is critical
+  if (parent != 0) {
 
-  } else if ((*parent)->getBalance() > 1) {
-    // right left case
-    if (((*parent)->getRightChild())->getBalance() < 0) {
-      rotateLeft(&((*parent)->getRightChild()));
+    if ((*parent)->getBalance() < -1) {
+      // left right case
+      if (((*parent)->getLeftChild())->getBalance() > 0) {
+        rotateLeft(&((*parent)->getLeftChild()));
+      }
+      // left left case
+      rotateRight(parent);
+
+    } else if ((*parent)->getBalance() > 1) {
+      // right left case
+      if (((*parent)->getRightChild())->getBalance() < 0) {
+        rotateLeft(&((*parent)->getRightChild()));
+      }
+      // right right case
+      rotateLeft(parent);
     }
-    // right right case
-    rotateLeft(parent);
 
   // there are no critical nodes so adjust balances
   } else {
