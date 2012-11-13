@@ -58,22 +58,24 @@ void AVL<T>::insert(T v) {
   *curr = temp;
 
   // check if suspect node is critical
-  if (parent != 0) {
-
-    if ((*parent)->getBalance() < -1) {
-      // left right case
-      if (((*parent)->getLeftChild())->getBalance() > 0) {
-        rotateLeft(&((*parent)->getLeftChild()));
-      }
-      // left left case
+  if (getBalance(*parent) < -1) {
+    // left right case
+    if (getBalance((*parent)->getLeftChild()) > 0) {
+      rotateLeft(&((*parent)->getLeftChild()));
       rotateRight(parent);
+    // left left case
+    } else {
+      rotateRight(parent);
+    }
 
-    } else if ((*parent)->getBalance() > 1) {
-      // right left case
-      if (((*parent)->getRightChild())->getBalance() < 0) {
-        rotateLeft(&((*parent)->getRightChild()));
-      }
-      // right right case
+  // check if suspect node is critical
+  } else if (getBalance(*parent) > 1) {
+    // right left case
+    if (getBalance((*parent)->getRightChild()) < 0) {
+      rotateRight(&((*parent)->getRightChild()));
+      rotateLeft(parent);
+    // right right case
+    } else {
       rotateLeft(parent);
     }
 
@@ -202,6 +204,7 @@ int AVL<T>::getBalance(Node<T>* n) {
 
 template <typename T>
 void AVL<T>::rotateLeft(Node<T>** parent) {
+  cout << "left rotation" << endl;
   Node<T>* cn = *parent;
   Node<T>* temprc = cn->getRightChild();
 
@@ -219,6 +222,7 @@ void AVL<T>::rotateLeft(Node<T>** parent) {
 
 template <typename T>
 void AVL<T>::rotateRight(Node<T>** parent) {
+  cout << "right rotation" << endl;
   Node<T>* cn = *parent;
   Node<T>* templc = cn->getLeftChild();
 
