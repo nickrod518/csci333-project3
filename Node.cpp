@@ -25,16 +25,6 @@ void Node<T>::setBalance(int b) {
 }
 
 template <typename T>
-void Node<T>::decBalance() {
-  --balance;
-}
-
-template <typename T>
-void Node<T>::incBalance() {
-  ++balance;
-}
-
-template <typename T>
 void Node<T>::clearChildren() {
   leftChild = 0;
   rightChild = 0;
