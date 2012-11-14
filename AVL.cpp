@@ -217,10 +217,7 @@ void AVL<T>::rotateLeft(Node<T>** parent) {
   } else {
     temprc->setLeftChild(*cn);
     *parent = temprc;
-    // replace cn to prevent seg fault from its child pointers
-    Node<T>* replacement = new Node<T>(cn->getValue());
-    temprc->setLeftChild(*replacement);
-    delete cn;
+    cn->clearChildren();
   }
 
   // update balances
@@ -242,10 +239,7 @@ void AVL<T>::rotateRight(Node<T>** parent) {
   } else {
     templc->setRightChild(*cn);
     *parent = templc;
-    // replace cn to prevent seg fault from its child pointers
-    Node<T>* replacement = new Node<T>(cn->getValue());
-    templc->setRightChild(*replacement);
-    delete cn;
+    cn->clearChildren();
   }
 
   // update balances

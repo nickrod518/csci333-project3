@@ -18,6 +18,8 @@ class Node {
   void decBalance();
   void incBalance();
 
+  void clearChildren();
+
   Node<T>*& getLeftChild();
   void setLeftChild(Node<T>& n);
 

@@ -35,6 +35,12 @@ void Node<T>::incBalance() {
 }
 
 template <typename T>
+void Node<T>::clearChildren() {
+  leftChild = 0;
+  rightChild = 0;
+}
+
+template <typename T>
 Node<T>*& Node<T>::getLeftChild() {
   return leftChild;
 }
