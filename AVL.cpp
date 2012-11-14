@@ -138,22 +138,22 @@ void AVL<T>::remove(T v) {
       if (rand() % 2 == 1) {
 
         // in-order successor
-        Node<T>* IOS = (*curr)->getRightChild();
-        while (IOS->getLeftChild() != 0) {
-          IOS = IOS->getLeftChild();
+        Node<T>* ios = (*curr)->getRightChild();
+        while (ios->getLeftChild() != 0) {
+          ios = ios->getLeftChild();
         }
-        IOS->setLeftChild(*((temp)->getLeftChild()));
-        *curr = IOS;
+        ios->setLeftChild(*((temp)->getLeftChild()));
+        *curr = ios;
         delete temp;
 
       } else {
         // in-order predecessor
-        Node<T>* IOP = (*curr)->getLeftChild();
-        while (IOP->getRightChild() != 0) {
-          IOP = IOP->getRightChild();
+        Node<T>* iop = (*curr)->getLeftChild();
+        while (iop->getRightChild() != 0) {
+          iop = iop->getRightChild();
         }
-        IOP->setRightChild(*((temp)->getRightChild()));
-        *curr = IOP;
+        iop->setRightChild(*((temp)->getRightChild()));
+        *curr = iop;
         delete temp;
       }
     }
