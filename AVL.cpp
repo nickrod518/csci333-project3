@@ -212,12 +212,19 @@ void AVL<T>::rotateLeft(Node<T>** parent) {
   if (temprc->getLeftChild() != 0) {
     Node<T>* templc = temprc->getLeftChild();
     cn->setRightChild(*templc);
+    temprc->setLeftChild(*cn);
+    *parent = temprc;
+  } else {
+    temprc->setLeftChild(*cn);
+    *parent = temprc;
+    // replace cn to prevent seg fault from its child pointers
+    Node<T>* replacement = new Node<T>(cn->getValue());
+    temprc->setLeftChild(*replacement);
+    delete cn;
   }
-  temprc->setLeftChild(*cn);
-  *parent = temprc;
 
   // update balances
-  temprc->decBalance();
+  temprc->setBalance(0);
 }
 
 template <typename T>
@@ -230,12 +237,19 @@ void AVL<T>::rotateRight(Node<T>** parent) {
   if (templc->getRightChild() != 0) {
     Node<T>* temprc = templc->getRightChild();
     cn->setLeftChild(*temprc);
+    templc->setRightChild(*cn);
+    *parent = templc;
+  } else {
+    templc->setRightChild(*cn);
+    *parent = templc;
+    // replace cn to prevent seg fault from its child pointers
+    Node<T>* replacement = new Node<T>(cn->getValue());
+    templc->setRightChild(*replacement);
+    delete cn;
   }
-  templc->setRightChild(*cn);
-  *parent = templc;
 
   // update balances
-  templc->incBalance();
+  templc->setBalance(0);
 }
 
 template <typename T>
