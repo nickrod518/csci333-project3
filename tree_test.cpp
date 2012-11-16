@@ -61,4 +61,8 @@ int main() {
   cout << "remove leaf" << endl;
   avl2->remove(7);
   avl2->print();
+
+  cout << "remove node with 1 child" << endl;
+  avl5->remove(2);
+  avl5->print();
 }

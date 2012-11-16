@@ -192,7 +192,8 @@ void AVL<T>::remove(T v) {
       path.pop_back();
 
       // check if node is critical
-      if (parent != 0 && v > (*parent)->getValue()) {
+      //if (parent != 0 && v > (*parent)->getValue()) {
+      if (parent != 0 && getBalance(*parent) < -1) {
         // left right case
         if (getBalance((*parent)->getLeftChild()) > 0) {
           rotateLeft(&((*parent)->getLeftChild()));
@@ -203,7 +204,8 @@ void AVL<T>::remove(T v) {
         }
 
       // check if node is critical
-      } else if (parent != 0 && v < (*parent)->getValue()) {
+      //} else if (parent != 0 && v < (*parent)->getValue()) {
+      } else if (parent != 0 && getBalance(*parent) > 1) {
         // right left case
         if (getBalance((*parent)->getRightChild()) < 0) {
           rotateRight(&((*parent)->getRightChild()));
