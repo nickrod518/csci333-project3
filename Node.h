@@ -15,6 +15,8 @@ class Node {
 
   int getBalance();
   void setBalance(int b);
+  void decBalance();
+  void incBalance();
 
   void clearChildren();
 

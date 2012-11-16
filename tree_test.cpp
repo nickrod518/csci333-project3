@@ -7,6 +7,7 @@ int main() {
   AVL<int>* avl4 = new AVL<int>();
   AVL<int>* avl5 = new AVL<int>();
 
+  cout << "***INSERT TESTS***" << endl;
   cout << "right right case" << endl;
   avl1->insert(5);
   avl1->insert(6);
@@ -46,7 +47,18 @@ int main() {
   avl5->insert(1);
   avl5->insert(15);
   avl5->insert(17);
+  avl5->print();
   avl5->insert(16);
   avl5->print();
   cout << "------" << endl;
+
+  cout << "***REMOVE TESTS***" << endl;
+  cout << "remove node with 2 children" << endl;
+  avl1->remove(6);
+  avl1->print();
+  cout << "------" << endl;
+
+  cout << "remove leaf" << endl;
+  avl2->remove(7);
+  avl2->print();
 }
