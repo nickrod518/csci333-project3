@@ -83,7 +83,7 @@ void AVL<T>::insert(T v) {
   // check if suspect node is critical
   } else if (parent != 0 && v > (*parent)->getValue()) {
     // right left case
-    if ((*parent)->getRightChild()->getBalance() > 0) {
+    if ((*parent)->getRightChild()->getBalance() < 0) {
       rotateRight(&((*parent)->getRightChild()));
       rotateLeft(parent);
     // right right case
@@ -112,6 +112,8 @@ void AVL<T>::remove(T v) {
   // store path
   Node<T>** parent;
   vector< Node<T>** > path;
+  // keep track of previous node
+  Node<T>* prev = 0;
 
   // find the node
   while (*curr != 0 && (*curr)->getValue() != v) {
@@ -190,7 +192,7 @@ void AVL<T>::remove(T v) {
       path.pop_back();
 
       // check if node is critical
-      if (parent != 0 && v < (*parent)->getValue()) {
+      if (parent != 0 && v > (*parent)->getValue()) {
         // left right case
         if (getBalance((*parent)->getLeftChild()) > 0) {
           rotateLeft(&((*parent)->getLeftChild()));
@@ -201,7 +203,7 @@ void AVL<T>::remove(T v) {
         }
 
       // check if node is critical
-      } else if (parent != 0 && v > (*parent)->getValue()) {
+      } else if (parent != 0 && v < (*parent)->getValue()) {
         // right left case
         if (getBalance((*parent)->getRightChild()) < 0) {
           rotateRight(&((*parent)->getRightChild()));
